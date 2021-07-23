@@ -43,13 +43,15 @@ class Register(APIView):
         serializer = UserDetailSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
+            return Response({'status':'true','message':'you are registered succesfully'})
 
-        self.send_otp(phone,otp)
-        profile = Profile(phone = phone ,otp = otp)
-        profile.save()
-        request.session['phone'] = phone
-        redirect('OtpVerification')
-        return Response({'status':'true','message':'you are registered succesfully'})
+        # self.send_otp(phone,otp)
+        # profile = Profile(phone = phone ,otp = otp)
+        # profile.save()
+        # request.session['phone'] = phone
+        #redirect('OtpVerification')
+        else:
+            return Response({'status':'False','message':'your credentials are not valid'})
 
 
 

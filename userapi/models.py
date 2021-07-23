@@ -13,6 +13,9 @@ class Profile(models.Model):
     phone = models.CharField(max_length=10)
     otp = models.IntegerField()
 
+    def __str__(self):
+        return self.phone
+
 class HotelDetail(models.Model):
     place = models.CharField(max_length=100)
     price = models.IntegerField()
