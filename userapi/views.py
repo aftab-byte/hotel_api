@@ -85,7 +85,7 @@ class OtpVerification(APIView):
             # print(token.decode('utf-8'))
             # print(type(token))
             response = Response()
-            response.set_cookie(key='jwt',value = token.decode('utf-8'), httponly = True)
+            response.set_cookie(key='jwt',value = token, httponly = True)
             response.data = {
             'status':'True',
             'jwt':token,
