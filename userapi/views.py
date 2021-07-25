@@ -133,7 +133,7 @@ class HotelDetailView(APIView):
         if not token:
             raise AuthenticationFailed('Unauthenticated')
         try:
-            payload = jwt.decode(jwt = token ,key="donottellanyone")
+            payload = jwt.decode(jwt = token ,key="donottellanyone",algorithms = ['HS256'])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated')
 
