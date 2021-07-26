@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework.schemas import get_schema_view
+from rest_framework.documentation import include_docs_urls
 from userapi import views
 urlpatterns = [
 
@@ -8,6 +10,11 @@ urlpatterns = [
     path('login',views.Login.as_view(),name='login'),
     path('detail',views.HotelDetailView.as_view(),name='detail'),
     path('logout',views.Logout.as_view(),name='logout'),
-
+    path('docs/', include_docs_urls(title='Hotel Api')),
+    path('schema', get_schema_view(
+        title="Hotel Api",
+        description="API for glorify hotel Registration and authentication …",
+        version="1.0.0"
+    ), name='openapi-schema'),
 
 ]

@@ -118,7 +118,7 @@ class Login(APIView):
         phone = request.data['phone']
         phone_check  = UserDetail.objects.filter(phone = phone).first()
         if phone_check is None:
-            return ({'message':'This number is not registered'})
+            return Response({'message':'This number is not registered'})
 
         self.send_otp(phone,otp)
         profile = Profile(phone = phone ,otp = otp)
