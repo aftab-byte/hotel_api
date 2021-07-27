@@ -1,6 +1,7 @@
 from django.shortcuts import render ,redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 from .models import UserDetail ,Profile ,HotelDetail
 import os
@@ -52,13 +53,14 @@ class Register(APIView):
         serializer = UserDetailSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
+            return Response({'status':'true','message':'you are registered succesfully'},status=status.HTTP_201_CREATED)
 
         # self.send_otp(phone,otp)
         # profile = Profile(phone = phone ,otp = otp)
         # profile.save()
         # request.session['phone'] = phone
         # redirect('OtpVerification')
-        return Response({'status':'true','message':'you are registered succesfully'})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
