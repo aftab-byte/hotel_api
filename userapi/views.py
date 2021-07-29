@@ -68,7 +68,7 @@ class OtpVerification(APIView):
     def post(self,request):
         phone = request.session['phone']
         otp_check = request.data['otp']
-        user = UserDetail.objects.filter(phone = phone)
+        user = UserDetail.objects.filter(phone = phone).first()
         profile = Profile.objects.filter(phone = phone).last()
 
         if otp_check != profile.otp:
@@ -77,7 +77,6 @@ class OtpVerification(APIView):
 
         else:
             #return Response({'status':'True','message':'otp verified'})
-
             payload = {
                 'id':profile.id,
                 'phone':profile.phone
@@ -88,10 +87,16 @@ class OtpVerification(APIView):
             # print(type(token))
             response = Response()
             response.set_cookie(key='jwt',value = token, httponly = True)
+            detail = {
+            'name':user.name,
+            'phone':user.phone,
+            'email':user.email
+                }
             response.data = {
             'status':'True',
             'jwt':token,
-            'message':'otp verified'
+            'message':'otp verified',
+            'detail':detail
             }
             return response
 
@@ -120,13 +125,14 @@ class Login(APIView):
         phone = request.data['phone']
         phone_check  = UserDetail.objects.filter(phone = phone).first()
         if phone_check is None:
-            return Response({'message':'This number is not registered'})
+            return Response({'message':'This number is not registered'},status = status.HTTP_403_FORBIDDEN)
 
         self.send_otp(phone,otp)
         profile = Profile(phone = phone ,otp = otp)
         profile.save()
         request.session['phone'] = phone
         return Response({'status':'true','message':'otp is send to you'})
+
 
 class HotelDetailView(APIView):
     def get(self,request):
