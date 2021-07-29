@@ -130,14 +130,14 @@ class Login(APIView):
 
 class HotelDetailView(APIView):
     def get(self,request):
-        token = request.COOKIES.get('jwt')
-        print(token)
-        if not token:
-            raise AuthenticationFailed('Unauthenticated')
-        try:
-            payload = jwt.decode(jwt = token ,key="donottellanyone",algorithms = ['HS256'])
-        except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('Unauthenticated')
+        # token = request.COOKIES.get('jwt')
+        # print(token)
+        # if not token:
+        #     raise AuthenticationFailed('Unauthenticated')
+        # try:
+        #     payload = jwt.decode(jwt = token ,key="donottellanyone",algorithms = ['HS256'])
+        # except jwt.ExpiredSignatureError:
+        #     raise AuthenticationFailed('Unauthenticated')
 
         hotel = HotelDetail.objects.all()
         serializer =HotelDetailSerializer(hotel ,many=True)
