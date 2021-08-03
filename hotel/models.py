@@ -20,11 +20,11 @@ class HotelDescription(models.Model):
     price = models.DecimalField(max_digits=7,decimal_places=2)
     description = models.TextField(max_length=300)
     photo_main = models.ImageField(upload_to='description')
-    photo_1 = models.ImageField(upload_to='description' ,blank=True)
-    photo_2 = models.ImageField(upload_to='description',blank=True)
-    photo_3 = models.ImageField(upload_to='description',blank=True)
-    photo_4 = models.ImageField(upload_to='description' ,blank=True)
-    photo_5 = models.ImageField(upload_to='description',blank=True)
+    photo_1 = models.ImageField(upload_to='description')
+    photo_2 = models.ImageField(upload_to='description')
+    photo_3 = models.ImageField(upload_to='description')
+    photo_4 = models.ImageField(upload_to='description')
+    photo_5 = models.ImageField(upload_to='description')
 
     def __str__(self):
         return self.title

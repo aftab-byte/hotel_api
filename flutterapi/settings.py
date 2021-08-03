@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['deployhotelapi.herokuapp.com','127.0.0.1']
 INSTALLED_APPS = [
     'userapi.apps.UserapiConfig',
     'hotel.apps.HotelConfig',
+    'hotelapi.apps.HotelapiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
