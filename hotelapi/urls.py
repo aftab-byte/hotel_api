@@ -6,6 +6,7 @@ from hotelapi import views
 urlpatterns = [
 
     path('list',views.DetailsView.as_view()),
+    path('detail/<int:pk>',views.DescriptionAPI.as_view()),
     ###path for schema and docs
     path('docs/', include_docs_urls(title='Hotel Api')),
     path('schema', get_schema_view(
